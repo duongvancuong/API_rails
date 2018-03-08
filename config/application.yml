@@ -1,0 +1,5 @@
+DATABASE_HOSTNAME: "localhost"
+DATABASE_NAME: "api_base_db"
+DATABASE_USERNAME: "root"
+DATABASE_PASSWORD: "qweqwe123"
+REDIS_HOSTNAME: "localhost"

@@ -3,12 +3,9 @@ class Api::V1::TodosController < ApplicationController
 
   #GET /todos
   def index
-    @todos = current_user.todos.search(params).paginate(page: params[:page], per_page: params[:per_page] || 20)
+    @todos = current_user.todos.includes(:items).search(params).paginate(page: params[:page], per_page: params[:per_page] || 20)
     # json_response(hash_data)
-    render json: @todos, meta: { pagination:
-                                  { per_page: params[:per_page] || 20,
-                                    total_pages: @todos.total_pages,
-                                    total_objects: @todos.total_entries } }
+    render json: @todos, meta: pagination_obj(params[:page], params[:per_page], @todos.total_pages, @todos.total_entries)
   end
 
   def create
@@ -18,7 +15,7 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def show
-    json_response(@todo)
+    render json: @todo
   end
 
   # PUT /todos/:id
@@ -34,13 +31,23 @@ class Api::V1::TodosController < ApplicationController
   end
 
   private
-
   def todo_params
     # whitelist params
     params.permit(:title)
   end
 
   def set_todo
-    @todo = Todo.find(params[:id])
+    @todo = Todo.includes(:items).find(params[:id])
+  end
+
+  def pagination_obj page, per_page, total_pages, total_entries
+    {
+      pagination:{
+        page: page.to_i,
+        per_page: per_page || 20,
+        total_pages: total_pages,
+        total_objects: total_entries
+      }
+    }
   end
 end

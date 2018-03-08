@@ -7,9 +7,9 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem "rails", ">= 5.1.1"
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem "mysql2", ">= 0.3.18", "< 0.5"
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # gem "factory_girl"
@@ -27,12 +27,10 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'rack-cors'
 gem 'rack-attack'
 gem 'kaminari'
+gem "figaro"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
 
 group :development, :test do
   gem "byebug", platform: :mri
@@ -50,7 +48,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_bot_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'
   gem 'database_cleaner'
