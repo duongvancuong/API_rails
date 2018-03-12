@@ -17,8 +17,8 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configuration do |config|
-  # add `FactoryGirl` methods
-  config.include FactoryGirl::Syntax::Methods
+  # add `FactoryBot` methods
+  config.include FactoryBot::Syntax::Methods
   # config.include RequestSpecHelper, type: :request
   config.include RequestSpecHelper
   config.include ControllerSpecHelper

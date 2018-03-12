@@ -5,7 +5,12 @@ class Rack::Attack
   Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 
   # Allow all local traffic
-  whitelist('allow-localhost') do |req|
+  # whitelist('allow-localhost') do |req|
+  #   '127.0.0.1' == req.ip || '::1' == req.ip
+  # end
+
+  Rack::Attack.safelist('allow from localhost') do |req|
+    # Requests are allowed if the return value is truthy
     '127.0.0.1' == req.ip || '::1' == req.ip
   end
 
