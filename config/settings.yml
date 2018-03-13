@@ -1,0 +1,23 @@
+validations:
+  strings:
+    max_length: 255
+  email_regex: !ruby/regexp '/\A([a-zA-Z0-9][\w\.\+\-]*)@([\w.\-]+\.+[\w]{2,})\z/'
+  password_regex: !ruby/regexp '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,24}$/'
+
+auth_tokens:
+  token:
+    secure_length: 64
+  refresh_token:
+    secure_length: 64
+  expires_in: <%= 30.days %>
+  short_expires_in: <%= 1.days %>
+
+users:
+  reset_password_token:
+    secure_length: 128
+    expires_in: <%= 24.hours %>
+  confirm_email_token:
+    secure_length: 64
+    expires_in: <%= 30.days %>
+    change_email_expires_in: <%= 24.hours %>
+  password_regex_generate: '/[0-9a-zA-Z]{8,24}/'
