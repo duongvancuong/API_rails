@@ -4,7 +4,7 @@ class AuthToken < ApplicationRecord
   belongs_to :user
 
   validates :token, presence: true, length: {maximum: Settings.validations.strings.max_length}
-  validates :refresh_token, presence: true, length: {maximum: Strings.validations.strings.max_length}
+  validates :refresh_token, presence: true, length: {maximum: Settings.validations.strings.max_length}
   validates :expired_at, presence: true
 
   class << self

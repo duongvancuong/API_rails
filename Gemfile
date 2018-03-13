@@ -28,6 +28,7 @@ gem 'rack-cors'
 gem 'rack-attack'
 gem 'kaminari'
 gem "figaro"
+gem "config"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
