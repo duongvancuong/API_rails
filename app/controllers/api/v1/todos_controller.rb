@@ -1,10 +1,8 @@
 class Api::V1::TodosController < ApplicationController
   before_action :set_todo, only: [:show, :update, :destroy]
 
-  #GET /todos
   def index
     @todos = current_user.todos.includes(:items).search(params).paginate(page: params[:page], per_page: params[:per_page] ||= 20)
-    # json_response(hash_data)
     render json: @todos, meta: json_pagination(params[:page], params[:per_page], @todos.total_pages, @todos.total_entries)
   end
 
@@ -18,13 +16,11 @@ class Api::V1::TodosController < ApplicationController
     render json: @todo
   end
 
-  # PUT /todos/:id
   def update
     @todo.update todo_params
     head :no_content
   end
 
-  # DELETE /todos/:id
   def destroy
     @todo.destroy
     head :no_content
@@ -32,7 +28,6 @@ class Api::V1::TodosController < ApplicationController
 
   private
   def todo_params
-    # whitelist params
     params.permit :title
   end
 

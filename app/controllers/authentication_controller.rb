@@ -1,7 +1,7 @@
 class AuthenticationController < ApplicationController
-  skip_before_action :authorize_request, only: :authenticate
+  skip_before_action :authenticate!, only: :login
 
-  def authenticate
+  def login
     auth_token =
       AuthenticateUser.new(auth_params[:email], auth_params[:password]).perform!
     hash_authen = {

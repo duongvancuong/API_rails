@@ -14,7 +14,7 @@ class AuthToken < ApplicationRecord
     end
 
     def from_token! token
-      find_by(token: token).tap{|t| raise TokenExpired if t&.expired?}
+      find_by(token: token).tap{|t| raise(ExceptionHandler::MissingToken, Message.expired_token) if t&.expired?}
     end
   end
 
