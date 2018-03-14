@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       end
     end
   end
-  post 'auth/login', to: 'authentication#authenticate'
+  post 'auth/login', to: 'authentication#login'
+  delete 'auth/logout', to: 'authentication#logout'
+  patch 'auth/refresh', to: 'authentication#refresh_token'
   post 'signup', to: 'users#create'
   # match '*path', via: [:options], to:  lambda {|_| [204, {'Access-Control-Allow-Headers' => "Origin, Content-Type, Accept,
   #   Authorization, Token", 'Access-Control-Allow-Origin' => "*", 'Content-Type' => 'text/plain'}, []]}

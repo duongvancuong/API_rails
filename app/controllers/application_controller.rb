@@ -3,14 +3,11 @@ class ApplicationController < ActionController::API
   include ExceptionHandler
   include ActionController::Serialization
 
-  # called before every action on controllers
-  before_action :authorize_request
+  before_action :authenticate!
+
   attr_reader :current_user
 
-  private
-
-  # Check for valid request token and return user
-  def authorize_request
-    @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
+  def authenticate!
+   @current_user = AuthorizeApiRequest.new(request.headers).perform!
   end
 end
