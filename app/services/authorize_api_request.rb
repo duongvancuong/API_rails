@@ -8,9 +8,10 @@ class AuthorizeApiRequest
   end
 
   def perform!
-    raise(ExceptionHandler::InvalidToken, Message.invalid_token) unless current_user
+    raise(ExceptionHandler::InvalidToken) unless current_user
     current_user
   end
+
   private
   def current_user
     @current_user ||= AuthToken.from_token!(http_auth_header)&.user
@@ -20,6 +21,6 @@ class AuthorizeApiRequest
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     end
-      raise(ExceptionHandler::MissingToken, Message.missing_token)
+      raise(ExceptionHandler::MissingToken)
   end
 end
