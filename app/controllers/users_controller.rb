@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: :create
-  # POST /signup
-  # return authenticated token upon signup
+  skip_before_action :authenticate!, only: :create
+
   def create
     auth_token = SignUp.perform! user_params
     response = { message: Message.account_created, auth_token: auth_token }
@@ -9,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   private
-
   def user_params
     params.permit(
       :name,
