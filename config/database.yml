@@ -8,6 +8,7 @@ default: &default
   host: <%= ENV["DATABASE_HOSTNAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
+  port: <%= ENV["DATABASE_PORT"] %>
   redis:
     host: redis://<%= ENV["REDIS_HOSTNAME"] %>:6379
     options:
@@ -18,7 +19,7 @@ development:
   <<: *default
 
 test:
-  database: glopla_api_test
+  database: todo_api_test
   <<: *default
 
 staging:
