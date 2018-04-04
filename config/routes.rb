@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       resources :todos do
         resources :items
       end
+      get 'instagram/owner', to: 'users_instagram#index'
+      get 'instagram/owner/media', to: 'users_instagram#media_recent_owner'
+      get 'instagram/user/:user_id/media', to: 'users_instagram#media_recent_user'
+      get 'instagram/user/media/liked', to: 'users_instagram#media_liked'
     end
   end
   post 'auth/login', to: 'authentication#login'
