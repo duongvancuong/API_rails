@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    restart:
+      always
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=qweqwe123
+    volumes:
+      - ./containers/mysql/my.cnf:/ect/mysql/my.cnf
+    ports:
+      - 43306:3306
+  web:
+    env_file:
+      - ./docker/api.env
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - '8082:3000'
+    depends_on:
+      - db
+    volumes:
+      - .:/myapp

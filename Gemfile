@@ -28,6 +28,10 @@ gem 'rack-cors'
 gem 'rack-attack'
 gem 'kaminari'
 gem "figaro"
+gem "config"
+# Use to connect with the third party API
+gem 'dotenv-rails'
+gem 'faraday'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
