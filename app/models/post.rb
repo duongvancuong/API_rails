@@ -4,4 +4,6 @@ class Post < ApplicationRecord
 
   validates :user_id, presence: true
   validates :content, presence: true
+
+  scope :desc, -> {order(created_at: :desc)}
 end
