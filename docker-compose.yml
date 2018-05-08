@@ -1,16 +1,6 @@
 version: '3'
 services:
-  db:
-    restart:
-      always
-    image: mysql:5.6
-    environment:
-      - MYSQL_ROOT_PASSWORD=qweqwe123
-    volumes:
-      - ./containers/mysql/my.cnf:/ect/mysql/my.cnf
-    ports:
-      - 43306:3306
-  web:
+  app:
     env_file:
       - ./docker/api.env
     build:
@@ -23,3 +13,13 @@ services:
       - db
     volumes:
       - .:/myapp
+  db:
+    restart:
+      always
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=qweqwe123
+    volumes:
+      - ./containers/mysql/my.cnf:/ect/mysql/my.cnf
+    ports:
+      - 43306:3306
